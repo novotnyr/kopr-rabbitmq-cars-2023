@@ -12,6 +12,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 const val ALL_CARS_QUEUE = "allCars"
+const val COMPACT_CARS_QUEUE = "compactCars"
+const val COMPACT_CARS_ROUTING_KEY = "car.C"
 
 @Configuration
 class AmpqConfiguration {
