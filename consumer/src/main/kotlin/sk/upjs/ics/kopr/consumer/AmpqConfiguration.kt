@@ -13,7 +13,9 @@ import org.springframework.context.annotation.Configuration
 
 const val ALL_CARS_QUEUE = "allCars"
 const val COMPACT_CARS_QUEUE = "compactCars"
+const val SMALL_CARS_QUEUE = "smallCars"
 const val COMPACT_CARS_ROUTING_KEY = "car.C"
+const val SMALL_CARS_ROUTING_KEY = "car.A"
 
 @Configuration
 class AmpqConfiguration {
@@ -31,4 +33,10 @@ class AmpqConfiguration {
     fun allCarsBinding(): Binding {
         return bind(allCarsQueue()).to(carExchange()).with("car.#")
     }
+
+    @Bean
+    fun smallCarsQueue(): Queue = durable(SMALL_CARS_QUEUE).build()
+
+    @Bean
+    fun smallCarsBinding(): Binding = bind(smallCarsQueue()).to(carExchange()).with(SMALL_CARS_ROUTING_KEY)
 }
