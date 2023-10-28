@@ -1,0 +1,28 @@
+@startuml
+left to right direction
+skinparam queue {
+  BackGroundColor<<exchange>>  #96616B
+  BackGroundColor #F76F8E
+}
+
+queue "car" <<exchange>>
+
+queue "smallCars"
+queue "compactCars"
+queue "anyCars"
+
+"car" -> "smallCars": "car.A"
+"car" -> "compactCars": "car.C"
+
+"smallCars" <- [fun unreliableSmallCarConsumer #1]
+"compactCars" <- [fun consumeCompactCar #1]
+
+"smallCars" <-- [fun unreliableSmallCarConsumer #2]
+"compactCars" <-- [fun consumeCompactCar #2]
+
+"car" ---> "anyCars": car.#
+
+"anyCars" <-- [fun consumeAnyCar #1]
+"anyCars" <-- [fun consumeAnyCar #2]
+"anyCars" <-- [fun consumeAnyCar #3]
+@enduml
